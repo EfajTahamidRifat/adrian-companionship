@@ -1,7 +1,7 @@
 <title>Adrian · Companionship &amp; Mental Fortitude</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Figtree:wght@300;400;500;600&family=Caveat:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Figtree:wght@300;400;500;600&family=Caveat:wght@500;600&family=Courier+Prime&display=swap">
 <style>
 /* Layout: a summer-afternoon film reel. Pinned arch of Adrian (150 frames @30fps) opens to full frame, then polaroids, a parallax hillside at golden hour, stacked postcards, and a dusk sky to close. */
 :root{
@@ -21,6 +21,7 @@
   --f-display:"Cormorant", "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --f-body:"Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
   --f-hand:"Caveat", "Segoe Print", "Bradley Hand", cursive;
+  --f-type:"Courier Prime", "Courier New", Courier, monospace;
   --ease-out:cubic-bezier(.16,1,.3,1);
   --gutter:clamp(16px,4vw,56px);
 }
@@ -43,7 +44,7 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1;margin:0;tex
 .u path{fill:none;stroke:var(--marigold);stroke-width:3;stroke-linecap:round}
 
 /* ---------- Film grain + petals ---------- */
-.grain{position:fixed;inset:-50%;z-index:180;pointer-events:none;opacity:.09;mix-blend-mode:multiply;
+.grain{position:fixed;inset:-50%;z-index:180;pointer-events:none;opacity:.055;will-change:transform;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .18 0 0 0 0 .12 0 0 0 1.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation:grain .9s steps(6) infinite}
 @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
@@ -308,7 +309,7 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1;margin:0;tex
 .contact-copy p{opacity:.85;max-width:40ch}
 .contact-copy .hand{font-size:1.7rem;color:#FFD58A;display:block;margin-top:18px;transform:rotate(-2deg)}
 .reach{display:grid;gap:16px}
-.reach-card{position:relative;display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:18px;align-items:center;padding:22px 22px;border-radius:24px;background:rgba(251,245,232,.1);box-shadow:inset 0 0 0 1px rgba(251,245,232,.2);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);will-change:transform}
+.reach-card{position:relative;display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:18px;align-items:center;padding:22px 22px;border-radius:24px;background:rgba(251,245,232,.12);box-shadow:inset 0 0 0 1px rgba(251,245,232,.22);will-change:transform}
 .reach-card .ic{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--marigold);color:var(--ink)}
 .reach-card:nth-child(2) .ic{background:var(--rose)}
 .reach-card .ic svg{width:24px;height:24px}
@@ -320,6 +321,57 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1;margin:0;tex
 .reach-note{font-size:.88rem;opacity:.8;margin:6px 4px 0}
 @media (max-width:860px){.contact-grid{grid-template-columns:1fr}}
 @media (max-width:480px){.reach-card{grid-template-columns:44px minmax(0,1fr);gap:14px;padding:18px}.reach-card .ic{width:44px;height:44px}.copy{grid-column:2;justify-self:start}}
+
+
+/* ---------- Nostalgia layer: hero vignette + projector flicker ---------- */
+.vignette{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;background:radial-gradient(120% 90% at 50% 45%,rgba(0,0,0,0) 55%,rgba(60,32,10,.5) 100%)}
+.vignette::after{content:"";position:absolute;inset:0;background:rgba(255,236,200,.05);animation:flicker 2.6s steps(1) infinite}
+@keyframes flicker{0%{opacity:.2}12%{opacity:.6}14%{opacity:.1}40%{opacity:.4}62%{opacity:.15}64%{opacity:.7}80%{opacity:.25}100%{opacity:.4}}
+.dust{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;background-image:radial-gradient(circle at 20% 30%,rgba(255,240,210,.5) 0 1px,transparent 2px),radial-gradient(circle at 70% 60%,rgba(255,240,210,.4) 0 1px,transparent 2px),radial-gradient(circle at 40% 80%,rgba(255,240,210,.35) 0 1.5px,transparent 2.5px);background-size:340px 300px,420px 380px,520px 460px;animation:dust 14s linear infinite}
+@keyframes dust{to{background-position:60px -300px,-80px -380px,40px -460px}}
+
+/* ---------- Polaroids develop like instant film ---------- */
+.pola img{transition:filter 3.2s cubic-bezier(.3,.7,.2,1)}
+.pola:not(.developed) img{filter:sepia(.85) brightness(1.75) contrast(.45) saturate(.4) blur(1.5px)}
+.pola.developed img{filter:saturate(1.05) contrast(1.02)}
+
+/* ---------- Film reel ---------- */
+.reel{position:relative;padding-block:clamp(80px,10vw,140px);overflow:hidden}
+.reel-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(36px,5vw,64px)}
+.reel-head h2{font-size:clamp(2.6rem,5.6vw,5.2rem);font-weight:300;max-width:13ch;margin-top:16px}
+.reel-head h2 em{color:var(--clay)}
+.reel-head p{max-width:34ch;color:var(--ink-soft);margin:0}
+.strip{position:relative;background:#211C15;padding:34px 0;margin-inline:-6vw;box-shadow:0 30px 50px -30px rgba(40,20,0,.6)}
+.strip.s1{transform:rotate(-2.5deg)}
+.strip.s2{transform:rotate(1.8deg);margin-top:46px}
+.strip::before,.strip::after{content:"";position:absolute;left:0;right:0;height:12px;background-image:repeating-linear-gradient(90deg,transparent 0 12px,#F2E3C4 12px 26px,transparent 26px 38px);opacity:.9;border-radius:2px}
+.strip::before{top:11px}.strip::after{bottom:11px}
+.strip-track{display:flex;gap:14px;width:max-content;will-change:transform}
+.cell{position:relative;margin:0;width:clamp(200px,22vw,320px);aspect-ratio:3/2;overflow:hidden;background:#3a3226;flex:none}
+.cell img{width:100%;height:100%;object-fit:cover;object-position:50% 28%;filter:sepia(.55) saturate(1.15) contrast(1.06) brightness(.98);transition:filter .8s,transform 1.2s var(--ease-out)}
+.cell:hover img{filter:none;transform:scale(1.06)}
+.cell figcaption{position:absolute;left:10px;bottom:8px;font-family:var(--f-hand);font-size:1.25rem;color:#FFF3D6;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+.cell::after{content:attr(data-n);position:absolute;right:8px;top:6px;font:500 .62rem/1 var(--f-body);letter-spacing:.14em;color:#F0A24A}
+.strip .edge{position:absolute;left:4vw;top:-1px;font:600 .6rem/1 var(--f-body);letter-spacing:.3em;color:#F0A24A;opacity:.85}
+
+/* ---------- Letter ---------- */
+.letter-sec{position:relative;padding-block:clamp(80px,11vw,150px);overflow:hidden}
+.letter{position:relative;max-width:720px;margin-inline:auto;background-color:#FFFBF0;background-image:linear-gradient(90deg,transparent 54px,rgba(201,101,62,.35) 54px 56px,transparent 56px),repeating-linear-gradient(180deg,transparent 0 33px,rgba(141,182,203,.45) 33px 34px);background-position:0 70px;padding:56px clamp(24px,5vw,60px) 56px clamp(72px,9vw,96px);box-shadow:0 40px 70px -40px rgba(80,50,20,.55),0 2px 6px rgba(80,50,20,.1);transform:rotate(-1.2deg)}
+.letter .tape{position:absolute;top:-16px;left:50%;width:120px;height:32px;transform:translateX(-50%) rotate(3deg);background:rgba(169,191,122,.6)}
+.letter .stain{position:absolute;right:26px;bottom:30px;width:120px;height:120px;border-radius:50%;box-shadow:inset 0 0 0 7px rgba(150,95,45,.13),0 0 0 2px rgba(150,95,45,.06);transform:rotate(20deg)}
+.letter .flower{position:absolute;right:-30px;top:-40px;width:140px;transform:rotate(18deg);color:var(--rose)}
+.letter .date{font-family:var(--f-hand);font-size:1.5rem;color:var(--ink-soft);margin:0 0 6px}
+.type{font-family:var(--f-type);font-size:clamp(1rem,1.5vw,1.14rem);line-height:34px;color:#3A3628;white-space:pre-wrap;margin:0}
+.type .c{opacity:0}
+.type .caret{display:inline-block;width:.55em;height:1.05em;background:#3A3628;vertical-align:-2px;animation:caret 1s steps(1) infinite}
+@keyframes caret{50%{opacity:0}}
+.sign{font-family:var(--f-hand);font-size:clamp(2.6rem,5vw,3.6rem);color:var(--clay);margin:14px 0 0;display:inline-block;clip-path:inset(0 100% 0 0)}
+
+/* ---------- Butterflies + grass ---------- */
+.fly{position:absolute;z-index:7;width:34px;height:28px;pointer-events:none;will-change:transform}
+.fly .wing{transform-origin:50% 50%}
+#grass{position:absolute;left:0;bottom:0;width:100%;height:24vh;z-index:5;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.vignette::after,.dust,.type .caret{animation:none}.pola img{transition:none}.sign{clip-path:none}}
 
 /* ---------- Footer ---------- */
 footer{background:#2F3424;color:rgba(251,245,232,.68);padding-block:56px calc(40px + env(safe-area-inset-bottom,0px));font-size:.86rem}
@@ -376,6 +428,7 @@ footer{background:#2F3424;color:rgba(251,245,232,.68);padding-block:56px calc(40
 <section class="hero" id="top">
   <canvas id="seq" aria-label="Adrian walking through a garden"></canvas>
   <div class="leak a" id="leakA"></div><div class="leak b" id="leakB"></div>
+  <div class="vignette" id="vignette"></div><div class="dust" id="dust"></div>
   <div class="hero-copy" id="heroCopy">
     <h1 class="hero-title" id="heroTitle" aria-label="Adrian">Adrian</h1>
     <p class="hero-tag">Companionship <span>&amp;</span> Mental Fortitude</p>
@@ -473,6 +526,8 @@ footer{background:#2F3424;color:rgba(251,245,232,.68);padding-block:56px calc(40
   <svg class="bird" style="left:30%;top:30%" viewBox="0 0 26 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M1 6c4-4 8-4 12 1 4-5 8-5 12-1"/></svg>
   <svg class="bird" style="left:34%;top:27%;width:18px" viewBox="0 0 26 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1 6c4-4 8-4 12 1 4-5 8-5 12-1"/></svg>
   <svg class="bird" style="left:38%;top:31%;width:14px" viewBox="0 0 26 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 6c4-4 8-4 12 1 4-5 8-5 12-1"/></svg>
+  <svg class="fly" style="left:20%;top:55%" viewBox="0 0 34 28" aria-hidden="true"><g class="wing wl"><path fill="#E9A83A" d="M17 14C12 2 2 0 2 8s8 8 15 6Z"/><path fill="#C9653E" d="M17 14C11 16 4 22 8 26s9-6 9-12Z"/></g><g class="wing wr"><path fill="#E9A83A" d="M17 14C22 2 32 0 32 8s-8 8-15 6Z"/><path fill="#C9653E" d="M17 14c6 2 13 8 9 12s-9-6-9-12Z"/></g><rect x="16.2" y="9" width="1.6" height="12" rx=".8" fill="#2F3424"/></svg><svg class="fly" style="left:70%;top:62%" viewBox="0 0 34 28" aria-hidden="true"><g class="wing wl"><path fill="#F3B3A3" d="M17 14C12 2 2 0 2 8s8 8 15 6Z"/><path fill="#DE8E7C" d="M17 14C11 16 4 22 8 26s9-6 9-12Z"/></g><g class="wing wr"><path fill="#F3B3A3" d="M17 14C22 2 32 0 32 8s-8 8-15 6Z"/><path fill="#DE8E7C" d="M17 14c6 2 13 8 9 12s-9-6-9-12Z"/></g><rect x="16.2" y="9" width="1.6" height="12" rx=".8" fill="#2F3424"/></svg><svg class="fly" style="left:45%;top:70%" viewBox="0 0 34 28" aria-hidden="true"><g class="wing wl"><path fill="#BCD6E3" d="M17 14C12 2 2 0 2 8s8 8 15 6Z"/><path fill="#8DB6CB" d="M17 14C11 16 4 22 8 26s9-6 9-12Z"/></g><g class="wing wr"><path fill="#BCD6E3" d="M17 14C22 2 32 0 32 8s-8 8-15 6Z"/><path fill="#8DB6CB" d="M17 14c6 2 13 8 9 12s-9-6-9-12Z"/></g><rect x="16.2" y="9" width="1.6" height="12" rx=".8" fill="#2F3424"/></svg>
+  <canvas id="grass" aria-hidden="true"></canvas>
   <div class="hills-copy" id="hillsCopy">
     <span class="eyebrow">Every session</span>
     <h2>Fresh air, <em>slow steps,</em> real conversation.</h2>
@@ -483,6 +538,16 @@ footer{background:#2F3424;color:rgba(251,245,232,.68);padding-block:56px calc(40
   <div class="layer" data-depth="0.5"><svg viewBox="0 0 1440 340" preserveAspectRatio="none" style="height:38vh"><path fill="#6F9348" d="M0 210c200-90 380-70 560-10s360 50 520-20 260-40 360 0V340H0Z"/><g fill="#557A35"><path d="M260 170l22-70 22 70Z"/><path d="M300 180l18-56 18 56Z"/><rect x="279" y="168" width="5" height="18"/></g><g fill="#E9A83A"><circle cx="700" cy="230" r="4"/><circle cx="730" cy="240" r="3"/><circle cx="760" cy="226" r="4"/></g></svg></div>
   <div class="layer" data-depth="0.75"><svg viewBox="0 0 1440 300" preserveAspectRatio="none" style="height:32vh"><path fill="#4E7234" d="M0 190c220-70 420-60 640 0s420 50 800-30V300H0Z"/><path fill="none" stroke="#F5ECD9" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 14" d="M700 300C690 260 740 230 820 215s200-20 240-40"/></svg></div>
   <div class="layer" data-depth="1"><svg viewBox="0 0 1440 220" preserveAspectRatio="none" style="height:24vh"><path fill="#3B5A28" d="M0 140c160-30 300-20 460 10s360 20 520-20 320-30 460 10V220H0Z"/><g fill="#DE8E7C"><circle cx="120" cy="150" r="6"/><circle cx="150" cy="160" r="5"/><circle cx="1290" cy="140" r="6"/><circle cx="1320" cy="152" r="5"/></g><g fill="#FFD58A"><circle cx="190" cy="156" r="5"/><circle cx="1350" cy="146" r="5"/><circle cx="900" cy="150" r="4"/></g></svg></div>
+</section>
+
+<!-- Film reel -->
+<section class="reel" id="reel" aria-label="Little moments">
+  <div class="wrap reel-head">
+    <div><span class="eyebrow">Little moments</span><h2>The good stuff is <em>usually small.</em></h2></div>
+    <p>A walk that runs long. A coffee gone cold mid-sentence. The kind of afternoons worth keeping.</p>
+  </div>
+  <div class="strip s1"><span class="edge">ADRIAN 400 ▸ SAFETY FILM</span><div class="strip-track" id="strip1"><figure class="cell" data-n="01A"><img src="frames/f001.webp" alt="" loading="lazy"><figcaption>first steps</figcaption></figure><figure class="cell" data-n="02A"><img src="pola-garden.webp" alt="" loading="lazy"><figcaption>the long way round</figcaption></figure><figure class="cell" data-n="03A"><img src="frames/f060.webp" alt="" loading="lazy" style="object-position:50% 72%"><figcaption>listening</figcaption></figure><figure class="cell" data-n="04A"><img src="pola-flowers.webp" alt="" loading="lazy"><figcaption>spring</figcaption></figure><figure class="cell" data-n="05A"><img src="frames/f120.webp" alt="" loading="lazy" style="object-position:50% 92%"><figcaption>good company</figcaption></figure><figure class="cell" data-n="06A"><img src="plate.webp" alt="" loading="lazy"><figcaption>quiet places</figcaption></figure><figure class="cell" data-n="07A"><img src="frames/f150.webp" alt="" loading="lazy"><figcaption>steady</figcaption></figure><figure class="cell" data-n="08A"><img src="frames/f030.webp" alt="" loading="lazy" style="object-position:50% 2%"><figcaption>fresh air</figcaption></figure><figure class="cell" data-n="01A"><img src="frames/f001.webp" alt="" loading="lazy"><figcaption>first steps</figcaption></figure><figure class="cell" data-n="02A"><img src="pola-garden.webp" alt="" loading="lazy"><figcaption>the long way round</figcaption></figure><figure class="cell" data-n="03A"><img src="frames/f060.webp" alt="" loading="lazy" style="object-position:50% 72%"><figcaption>listening</figcaption></figure><figure class="cell" data-n="04A"><img src="pola-flowers.webp" alt="" loading="lazy"><figcaption>spring</figcaption></figure><figure class="cell" data-n="05A"><img src="frames/f120.webp" alt="" loading="lazy" style="object-position:50% 92%"><figcaption>good company</figcaption></figure><figure class="cell" data-n="06A"><img src="plate.webp" alt="" loading="lazy"><figcaption>quiet places</figcaption></figure><figure class="cell" data-n="07A"><img src="frames/f150.webp" alt="" loading="lazy"><figcaption>steady</figcaption></figure><figure class="cell" data-n="08A"><img src="frames/f030.webp" alt="" loading="lazy" style="object-position:50% 2%"><figcaption>fresh air</figcaption></figure></div></div>
+  <div class="strip s2"><span class="edge">▸ 24 EXP · I COME TO YOU</span><div class="strip-track" id="strip2"><figure class="cell" data-n="05A"><img src="frames/f120.webp" alt="" loading="lazy" style="object-position:50% 92%"><figcaption>good company</figcaption></figure><figure class="cell" data-n="08A"><img src="frames/f030.webp" alt="" loading="lazy" style="object-position:50% 2%"><figcaption>fresh air</figcaption></figure><figure class="cell" data-n="04A"><img src="pola-flowers.webp" alt="" loading="lazy"><figcaption>spring</figcaption></figure><figure class="cell" data-n="01A"><img src="frames/f001.webp" alt="" loading="lazy"><figcaption>first steps</figcaption></figure><figure class="cell" data-n="07A"><img src="frames/f150.webp" alt="" loading="lazy"><figcaption>steady</figcaption></figure><figure class="cell" data-n="02A"><img src="pola-garden.webp" alt="" loading="lazy"><figcaption>the long way round</figcaption></figure><figure class="cell" data-n="06A"><img src="plate.webp" alt="" loading="lazy"><figcaption>quiet places</figcaption></figure><figure class="cell" data-n="03A"><img src="frames/f060.webp" alt="" loading="lazy" style="object-position:50% 72%"><figcaption>listening</figcaption></figure><figure class="cell" data-n="05A"><img src="frames/f120.webp" alt="" loading="lazy" style="object-position:50% 92%"><figcaption>good company</figcaption></figure><figure class="cell" data-n="08A"><img src="frames/f030.webp" alt="" loading="lazy" style="object-position:50% 2%"><figcaption>fresh air</figcaption></figure><figure class="cell" data-n="04A"><img src="pola-flowers.webp" alt="" loading="lazy"><figcaption>spring</figcaption></figure><figure class="cell" data-n="01A"><img src="frames/f001.webp" alt="" loading="lazy"><figcaption>first steps</figcaption></figure><figure class="cell" data-n="07A"><img src="frames/f150.webp" alt="" loading="lazy"><figcaption>steady</figcaption></figure><figure class="cell" data-n="02A"><img src="pola-garden.webp" alt="" loading="lazy"><figcaption>the long way round</figcaption></figure><figure class="cell" data-n="06A"><img src="plate.webp" alt="" loading="lazy"><figcaption>quiet places</figcaption></figure><figure class="cell" data-n="03A"><img src="frames/f060.webp" alt="" loading="lazy" style="object-position:50% 72%"><figcaption>listening</figcaption></figure></div></div>
 </section>
 
 <!-- Services -->
@@ -591,6 +656,26 @@ footer{background:#2F3424;color:rgba(251,245,232,.68);padding-block:56px calc(40
       <div class="step"><i class="line"></i><h3>A first conversation</h3><p>We have a brief chat to see if we're a good fit and to agree on where and when to meet.</p></div>
       <div class="step"><i class="line"></i><h3>We meet where you are</h3><p>I come to you. Each session builds on the last, at the rhythm that works for your life.</p></div>
     </div>
+  </div>
+</section>
+
+<!-- Letter -->
+<section class="letter-sec" id="letter-sec">
+  <div class="leaf" data-speed="-0.25" style="width:200px;height:200px;left:3%;top:12%;color:var(--meadow);opacity:.5"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width=".9"><path d="M50 96C50 60 50 30 50 4"/><path d="M50 30c-14-2-22-12-22-24 12 2 20 10 22 24Z"/><path d="M50 30c14-2 22-12 22-24-12 2-20 10-22 24Z"/><path d="M50 56c-16-2-26-14-26-28 14 2 24 12 26 28Z"/><path d="M50 56c16-2 26-14 26-28-14 2-24 12-26 28Z"/></svg></div>
+  <div class="wrap">
+    <article class="letter" id="letter" aria-label="A note from Adrian">
+      <span class="tape"></span><span class="stain"></span>
+      <svg class="flower" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 140C52 110 48 80 50 50" fill="none" stroke="#7E9A5A" stroke-width="2"/><path d="M50 95c-14-4-22-16-20-26 12 2 20 12 20 26Z" fill="#93AE6E"/><g fill="currentColor" opacity=".9"><ellipse cx="50" cy="30" rx="9" ry="16"/><ellipse cx="50" cy="30" rx="9" ry="16" transform="rotate(72 50 46)"/><ellipse cx="50" cy="30" rx="9" ry="16" transform="rotate(144 50 46)"/><ellipse cx="50" cy="30" rx="9" ry="16" transform="rotate(216 50 46)"/><ellipse cx="50" cy="30" rx="9" ry="16" transform="rotate(288 50 46)"/></g><circle cx="50" cy="46" r="7" fill="#E9A83A"/></svg>
+      <p class="date">a note from Adrian</p>
+      <p class="type" id="typeText">Hello, and thank you for stopping by.
+
+Life can get loud. Sometimes all it takes is someone who shows up, listens properly, and walks beside you for a while.
+
+That&#x27;s what I do. No clinic, no clipboard. Just good conversation, fresh air and a steady hand when you need one.
+
+If that sounds like what you&#x27;re looking for, I&#x27;d be glad to meet you wherever you feel at ease.</p>
+      <p class="sign" id="sign">Adrian</p>
+    </article>
   </div>
 </section>
 
@@ -704,7 +789,7 @@ for (let i = 0; i < N; i++) {
 setTimeout(release, 4500);
 
 function resize(){
-  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  dpr = Math.min(window.devicePixelRatio || 1, 1.5);
   vw = canvas.clientWidth; vh = canvas.clientHeight;
   canvas.width = Math.round(vw * dpr); canvas.height = Math.round(vh * dpr);
   draw();
@@ -792,8 +877,8 @@ const pcv = $('#petals'), pctx = pcv.getContext('2d');
 let PW, PH, petals = [];
 const petalColors = ['#DE8E7C', '#E9A83A', '#F3B3A3', '#A9BF7A', '#FFD58A', '#C9653E'];
 function sizePetals(){
-  PW = innerWidth; PH = innerHeight; pcv.width = PW * dpr; pcv.height = PH * dpr;
-  const n = reduce ? 0 : Math.round(Math.min(26, PW / 55));
+  PW = innerWidth; PH = innerHeight; pcv.width = PW; pcv.height = PH;
+  const n = reduce ? 0 : Math.round(Math.min(22, PW / 70));
   petals = Array.from({ length: n }, () => newPetal(true));
 }
 function newPetal(any){ return { x: Math.random() * PW, y: any ? Math.random() * PH : -20, s: 4 + Math.random() * 7, r: Math.random() * 6.28, vr: (Math.random() - .5) * .04, sway: Math.random() * 6.28, sp: .35 + Math.random() * .6, c: petalColors[(Math.random() * petalColors.length) | 0], leaf: Math.random() < .35, flip: Math.random() * 6.28 }; }
@@ -801,7 +886,8 @@ sizePetals(); addEventListener('resize', sizePetals);
 let mouseX = -999, mouseY = -999;
 addEventListener('pointermove', e => { mouseX = e.clientX; mouseY = e.clientY; });
 function tickPetals(){
-  pctx.setTransform(dpr, 0, 0, dpr, 0, 0); pctx.clearRect(0, 0, PW, PH);
+  if (document.hidden) return;
+  pctx.setTransform(1, 0, 0, 1, 0, 0); pctx.clearRect(0, 0, PW, PH);
   const wind = Math.max(-6, Math.min(6, scrollVel / 400));
   petals.forEach((p, i) => {
     p.sway += .015; p.flip += .05; p.r += p.vr + wind * .004;
@@ -974,6 +1060,81 @@ const bgStops = [
 bgStops.forEach(([sel, col]) => ScrollTrigger.create({ trigger: sel, start: 'top 60%', end: 'bottom 40%',
   onToggle: s => s.isActive && gsap.to(document.body, { backgroundColor: col, duration: 1, ease: 'sine.out', overwrite: 'auto' }) }));
 
+
+/* ---------- Hero nostalgia: vignette + dust strengthen as the frame opens ---------- */
+const vig = $('#vignette'), dust = $('#dust');
+ScrollTrigger.create({ trigger: '.hero', start: 'top top', end: () => '+=' + Math.round(innerHeight * 2.6), scrub: true,
+  onUpdate: s => { const k = clamp01((s.progress - .15) / .5); vig.style.opacity = k; dust.style.opacity = k * .9; } });
+
+/* ---------- Polaroids develop ---------- */
+ScrollTrigger.create({ trigger: '#polas', start: 'top 70%', once: true, onEnter: () => {
+  $$('.pola').forEach((pl, i) => setTimeout(() => pl.classList.add('developed'), reduce ? 0 : 300 + i * 650));
+}});
+
+/* ---------- Film reel ---------- */
+const s1 = $('#strip1'), s2 = $('#strip2');
+gsap.fromTo(s1, { x: 0 }, { x: () => -s1.scrollWidth / 2 + innerWidth * .2, ease: 'none', scrollTrigger: { trigger: '#reel', start: 'top bottom', end: 'bottom top', scrub: .6 } });
+gsap.fromTo(s2, { x: () => -s2.scrollWidth / 2 + innerWidth * .2 }, { x: 0, ease: 'none', scrollTrigger: { trigger: '#reel', start: 'top bottom', end: 'bottom top', scrub: .6 } });
+gsap.from('.reel-head > *', { y: 40, opacity: 0, stagger: .12, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: '.reel-head', start: 'top 80%' } });
+gsap.ticker.add(() => { const sk = Math.max(-6, Math.min(6, scrollVel / 300)); gsap.set('.strip-track', { skewX: sk * .6 }); });
+
+/* ---------- Letter: typed out as you scroll, then signed ---------- */
+const tt = $('#typeText');
+const raw = tt.textContent;
+tt.innerHTML = [...raw].map(ch => ch === '\n' ? '\n' : `<span class="c">${ch.replace('&', '&amp;').replace('<', '&lt;')}</span>`).join('') + '<span class="caret"></span>';
+const chars = tt.querySelectorAll('.c');
+if (reduce) { chars.forEach(c => c.style.opacity = 1); }
+else {
+  const letterTl = gsap.timeline({ scrollTrigger: { trigger: '#letter', start: 'top 75%', end: 'bottom 55%', scrub: .4 } });
+  letterTl.to(chars, { opacity: 1, duration: .01, stagger: { each: .01 }, ease: 'none' })
+          .to('#sign', { clipPath: 'inset(0 0% 0 0)', duration: .6, ease: 'power1.inOut' });
+  gsap.from('#letter', { y: 80, rotate: 3, opacity: 0, duration: 1.3, ease: 'expo.out', scrollTrigger: { trigger: '#letter', start: 'top 90%' } });
+  gsap.from('#letter .flower', { scale: .4, rotate: -40, opacity: 0, duration: 1.4, ease: 'back.out(1.6)', scrollTrigger: { trigger: '#letter', start: 'top 70%' } });
+}
+
+/* ---------- Line-drawn leaves draw themselves ---------- */
+$$('.leaf svg[fill="none"] path').forEach(path => {
+  const L = path.getTotalLength(); path.style.strokeDasharray = L; path.style.strokeDashoffset = L;
+  gsap.to(path, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: path.closest('section'), start: 'top 85%', end: 'center 50%', scrub: true } });
+});
+
+/* ---------- Butterflies drift across the hillside ---------- */
+$$('.fly').forEach((f, i) => {
+  if (reduce) return;
+  gsap.to(f.querySelectorAll('.wl'), { scaleX: .25, duration: .12 + i * .02, repeat: -1, yoyo: true, ease: 'sine.inOut', transformOrigin: '100% 50%' });
+  gsap.to(f.querySelectorAll('.wr'), { scaleX: .25, duration: .12 + i * .02, repeat: -1, yoyo: true, ease: 'sine.inOut', transformOrigin: '0% 50%' });
+  const wander = () => gsap.to(f, { x: gsap.utils.random(-260, 260), y: gsap.utils.random(-160, 80), rotate: gsap.utils.random(-25, 25), duration: gsap.utils.random(2.5, 4.5), ease: 'sine.inOut', onComplete: wander });
+  wander();
+});
+
+/* ---------- Swaying grass that parts around the cursor ---------- */
+const gcv = $('#grass'), gx = gcv.getContext('2d');
+let gw, gh, blades = [], gVisible = false, gmx = -999;
+function sizeGrass(){ const r = gcv.getBoundingClientRect(); gw = r.width; gh = r.height; gcv.width = gw; gcv.height = gh;
+  const n = Math.round(Math.min(260, gw / 6));
+  const cols = ['#3B5A28', '#4E7234', '#5F8442', '#6F9348', '#2F4A22'];
+  blades = Array.from({ length: n }, (_, i) => ({ x: (i / n) * gw + Math.random() * 6, h: gh * (.35 + Math.random() * .6), w: 2 + Math.random() * 3, c: cols[(Math.random() * cols.length) | 0], ph: Math.random() * 6.28, flower: Math.random() < .07 ? ['#FFD58A', '#DE8E7C', '#FBF5E8'][(Math.random() * 3) | 0] : null })); }
+sizeGrass(); addEventListener('resize', sizeGrass);
+new IntersectionObserver(e => gVisible = e[0].isIntersecting).observe(gcv);
+$('#hills').addEventListener('pointermove', e => { gmx = e.clientX - gcv.getBoundingClientRect().left; });
+$('#hills').addEventListener('pointerleave', () => { gmx = -999; });
+let gt = 0;
+gsap.ticker.add(() => {
+  if (!gVisible) return;
+  gt += reduce ? 0 : .02;
+  gx.clearRect(0, 0, gw, gh);
+  const wind = Math.max(-1, Math.min(1, scrollVel / 1500));
+  blades.forEach(b => {
+    let bend = Math.sin(gt + b.ph + b.x * .01) * .18 + wind * .5;
+    const d = b.x - gmx; if (Math.abs(d) < 90) bend += (d > 0 ? 1 : -1) * (1 - Math.abs(d) / 90) * .7;
+    const tipX = b.x + bend * b.h, tipY = gh - b.h * (1 - Math.abs(bend) * .25);
+    gx.fillStyle = b.c; gx.beginPath(); gx.moveTo(b.x - b.w, gh);
+    gx.quadraticCurveTo(b.x + bend * b.h * .3, gh - b.h * .55, tipX, tipY);
+    gx.quadraticCurveTo(b.x + bend * b.h * .3 + b.w, gh - b.h * .5, b.x + b.w, gh); gx.fill();
+    if (b.flower) { gx.fillStyle = b.flower; gx.beginPath(); gx.arc(tipX, tipY, 3.2, 0, 7); gx.fill(); }
+  });
+});
+
 /* ---------- Services stacking ---------- */
 const cards = $$('.card');
 cards.forEach((card, i) => {
@@ -988,15 +1149,16 @@ gsap.from('.services-head > *', { y: 40, opacity: 0, stagger: .1, duration: 1.1,
 const arts = $$('.card-art').map(el => { const c = el.querySelector('canvas'); return { el, c, x: c.getContext('2d'), kind: +el.dataset.art, visible: true }; });
 const io = new IntersectionObserver(es => es.forEach(e => { const a = arts.find(a => a.el === e.target); if (a) a.visible = e.isIntersecting; }));
 arts.forEach(a => io.observe(a.el));
-function sizeArt(a){ const r = a.el.getBoundingClientRect(); a.w = r.width; a.h = r.height; a.c.width = r.width * dpr; a.c.height = r.height * dpr; }
+function sizeArt(a){ const r = a.el.getBoundingClientRect(); a.w = r.width; a.h = r.height; a.c.width = r.width; a.c.height = r.height; }
 arts.forEach(sizeArt); addEventListener('resize', () => arts.forEach(sizeArt));
-let tArt = 0;
+let tArt = 0, artTick = false;
 gsap.ticker.add(() => {
-  tArt += reduce ? 0 : 0.006;
+  tArt += reduce ? 0 : 0.012;
+  artTick = !artTick; if (artTick) return; // 30fps is plenty for ambient art
   arts.forEach(a => {
     if (!a.visible) return;
     const { x, w, h, kind } = a;
-    x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    x.setTransform(1, 0, 0, 1, 0, 0);
     if (kind === 0) { // meadow with two drifting warm suns
       const g = x.createLinearGradient(0, 0, 0, h); g.addColorStop(0, '#9BC3A0'); g.addColorStop(1, '#5F8442'); x.fillStyle = g; x.fillRect(0, 0, w, h);
       for (let i = 0; i < 2; i++) {
@@ -1062,18 +1224,20 @@ gsap.from('.contact-copy > *', { y: 40, opacity: 0, stagger: .1, duration: 1.1, 
 gsap.from('.reach-card', { y: 60, opacity: 0, rotate: (i) => i ? 3 : -3, stagger: .12, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: '.reach', start: 'top 80%' } });
 gsap.fromTo('.contact .ridge', { yPercent: 40 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '.contact', start: 'top bottom', end: 'bottom bottom', scrub: true } });
 
-/* Fireflies */
+/* Fireflies (one pre-rendered glow sprite instead of a gradient per fly per frame) */
+const glowSprite = document.createElement('canvas'); glowSprite.width = glowSprite.height = 64;
+{ const g2 = glowSprite.getContext('2d'), rg = g2.createRadialGradient(32, 32, 0, 32, 32, 32); rg.addColorStop(0, 'rgba(255,225,130,1)'); rg.addColorStop(.35, 'rgba(255,210,110,.55)'); rg.addColorStop(1, 'rgba(255,200,100,0)'); g2.fillStyle = rg; g2.fillRect(0, 0, 64, 64); }
 const fcv = $('#fireflies'), fx = fcv.getContext('2d');
 let fw, fh, flies = [], fmx = -999, fmy = -999, fVisible = false;
-function sizeFlies(){ const r = fcv.getBoundingClientRect(); fw = r.width; fh = r.height; fcv.width = fw * dpr; fcv.height = fh * dpr;
-  flies = Array.from({ length: Math.round(Math.min(90, fw * fh / 12000)) }, () => ({ x: Math.random() * fw, y: Math.random() * fh * .8, vx: 0, vy: 0, ph: Math.random() * 6.28, sp: .5 + Math.random(), r: 1 + Math.random() * 2, star: Math.random() < .4 })); }
+function sizeFlies(){ const r = fcv.getBoundingClientRect(); fw = r.width; fh = r.height; fcv.width = fw; fcv.height = fh;
+  flies = Array.from({ length: Math.round(Math.min(70, fw * fh / 15000)) }, () => ({ x: Math.random() * fw, y: Math.random() * fh * .8, vx: 0, vy: 0, ph: Math.random() * 6.28, sp: .5 + Math.random(), r: 1 + Math.random() * 2, star: Math.random() < .4 })); }
 sizeFlies(); addEventListener('resize', sizeFlies);
 new IntersectionObserver(e => fVisible = e[0].isIntersecting).observe(fcv);
 $('.contact').addEventListener('pointermove', e => { const r = fcv.getBoundingClientRect(); fmx = e.clientX - r.left; fmy = e.clientY - r.top; });
 $('.contact').addEventListener('pointerleave', () => { fmx = fmy = -999; });
 gsap.ticker.add(() => {
   if (!fVisible) return;
-  fx.setTransform(dpr, 0, 0, dpr, 0, 0); fx.clearRect(0, 0, fw, fh);
+  fx.setTransform(1, 0, 0, 1, 0, 0); fx.clearRect(0, 0, fw, fh);
   flies.forEach(p => {
     p.ph += .02 * p.sp;
     const glow = (Math.sin(p.ph * 2) + 1) / 2;
@@ -1084,8 +1248,7 @@ gsap.ticker.add(() => {
     p.x += p.vx; p.y += p.vy;
     if (p.x < 0) p.x = fw; if (p.x > fw) p.x = 0; if (p.y < fh * .2) p.y = fh * .9; if (p.y > fh) p.y = fh * .25;
     const R = p.r * 6;
-    const g = fx.createRadialGradient(p.x, p.y, 0, p.x, p.y, R); g.addColorStop(0, `rgba(255,220,120,${.85 * glow})`); g.addColorStop(1, 'rgba(255,220,120,0)');
-    fx.fillStyle = g; fx.beginPath(); fx.arc(p.x, p.y, R, 0, 7); fx.fill();
+    fx.globalAlpha = .2 + .8 * glow; fx.drawImage(glowSprite, p.x - R, p.y - R, R * 2, R * 2); fx.globalAlpha = 1;
   });
 });
 
