@@ -95,12 +95,15 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1;margin:0;tex
 .leak{position:absolute;z-index:2;border-radius:50%;filter:blur(60px);mix-blend-mode:screen;pointer-events:none;opacity:0;will-change:transform,opacity}
 .leak.a{width:46vw;height:46vw;right:-12vw;top:-14vw;background:radial-gradient(circle,#FFB25E 0%,rgba(255,120,60,.0) 70%)}
 .leak.b{width:34vw;height:34vw;left:30vw;bottom:-16vw;background:radial-gradient(circle,#FF8FA0 0%,rgba(255,143,160,0) 70%)}
-.hero-copy{position:absolute;z-index:3;left:var(--gutter);top:50%;transform:translateY(-46%);max-width:min(46vw,620px)}
-.hero-title{font-size:clamp(5rem,14vw,13.5rem);font-weight:300;line-height:.86;letter-spacing:-.035em;display:block;overflow:hidden;padding-bottom:.08em}
+.hero-copy{position:absolute;z-index:3;left:var(--gutter);top:0;bottom:0;padding-top:70px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;max-width:min(46vw,620px)}
+.hero-title{font-size:clamp(4.6rem,11.5vw,11rem);font-weight:300;line-height:.86;letter-spacing:-.035em;display:block;overflow:hidden;padding-bottom:.08em}
 .hero-title .ch{display:inline-block;will-change:transform}
 .hero-title .ch:nth-child(2){font-style:italic;color:var(--clay)}
-.hero-sub{font-family:var(--f-display);font-size:clamp(1.35rem,2.2vw,2rem);font-style:italic;margin:18px 0 14px}
-.hero-lede{max-width:34ch;color:var(--ink-soft);font-size:1.02rem;margin:0 0 30px}
+.hero-tag{font-family:var(--f-body);font-weight:700;font-size:clamp(1.2rem,2.1vw,1.85rem);line-height:1.15;letter-spacing:-.01em;margin:6px 0 0;color:var(--ink)}
+.hero-tag span{font-family:var(--f-display);font-style:italic;font-weight:600;color:var(--clay);font-size:1.15em}
+.hero-sub{font-family:var(--f-display);font-size:clamp(1.25rem,1.9vw,1.75rem);font-style:italic;margin:12px 0 14px;color:var(--ink-soft)}
+.hero-lede{max-width:34ch;color:var(--ink-soft);font-size:1.02rem;margin:0 0 24px}
+@media (max-height:760px) and (min-width:761px){.hero-lede{display:none}}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .rate-chip{display:inline-flex;align-items:center;gap:14px;padding:10px 20px 10px 10px;border-radius:999px;background:var(--paper-2);box-shadow:0 12px 30px -14px rgba(120,70,20,.4)}
 .rate-chip i{width:38px;height:38px;border-radius:50%;background:var(--marigold);display:grid;place-items:center}
@@ -113,14 +116,15 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1;margin:0;tex
 .hero-overlay h2{font-size:clamp(2.6rem,7vw,6.6rem);font-weight:300;max-width:14ch}
 .hero-overlay h2 em{color:#FFD58A}
 .hero-overlay p{max-width:40ch;margin:18px 0 0;opacity:.9}
-.scroll-cue{position:absolute;z-index:3;left:var(--gutter);bottom:28px;display:flex;align-items:center;gap:12px;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft)}
+.scroll-cue{position:absolute;z-index:3;left:50%;transform:translateX(-50%);bottom:28px;display:flex;align-items:center;gap:12px;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft)}
 .scroll-cue span{width:1px;height:42px;background:linear-gradient(var(--clay),transparent);animation:cue 2.2s var(--ease-out) infinite;transform-origin:top}
 @keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(0);transform-origin:bottom}}
 .frame-count{position:absolute;z-index:3;right:var(--gutter);bottom:28px;font-size:.68rem;letter-spacing:.24em;color:var(--ink-soft);font-variant-numeric:tabular-nums}
 @media (max-width:760px){
-  .hero-copy{top:calc(84px + env(safe-area-inset-top,0px));transform:none;max-width:none;right:var(--gutter)}
+  .hero-copy{top:calc(84px + env(safe-area-inset-top,0px));bottom:auto;padding-top:0;justify-content:flex-start;max-width:none;right:var(--gutter)}
   .hero-title{font-size:clamp(4.2rem,22vw,7rem)}
-  .hero-sub{margin:8px 0 6px;font-size:1.25rem}
+  .hero-tag{font-size:1.15rem;margin-top:2px}
+  .hero-sub{margin:6px 0 8px;font-size:1.1rem}
   .hero-lede,.hero-actions .btn,.scroll-cue,.hero-note{display:none}
   .rate-chip{padding:6px 14px 6px 6px}.rate-chip i{width:30px;height:30px}.rate-chip b{font-size:1.15rem}
 }
@@ -135,6 +139,7 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1;margin:0;tex
 .marquee.two .marquee-item em{color:var(--clay);font-style:normal}
 .marquee-item svg{width:.42em;height:.42em;flex:none}
 
+
 /* ---------- Statement ---------- */
 .statement{position:relative;padding-block:clamp(100px,16vw,210px);overflow:hidden}
 .statement p{font-family:var(--f-display);font-size:clamp(1.9rem,4.4vw,4rem);line-height:1.14;font-weight:300;max-width:22ch;margin:22px 0 0}
@@ -143,6 +148,33 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1;margin:0;tex
 .statement .sig b{font-family:var(--f-hand);font-weight:500;font-size:2.1rem;color:var(--clay)}
 .leaf{position:absolute;pointer-events:none;will-change:transform}
 .leaf svg{width:100%;height:100%;display:block}
+
+
+/* ---------- Aura: the ChatGPT question ---------- */
+.aura{position:relative;padding-block:clamp(90px,13vw,180px);overflow:hidden}
+.aura-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px,7vw,100px);align-items:center}
+.chat{display:grid;gap:12px;width:100%;max-width:420px;justify-self:center;padding:20px 20px 24px;border-radius:30px;background:var(--paper-2);box-shadow:0 30px 60px -36px rgba(80,50,20,.45),0 0 0 1px var(--line);transform:rotate(-2deg);will-change:transform}
+.chat-head{display:flex;align-items:center;gap:10px;font-size:.78rem;color:var(--ink-soft);padding-bottom:12px;border-bottom:1px solid var(--line)}
+.chat-head i{width:30px;height:30px;border-radius:50%;background:#D9D9D2;display:grid;place-items:center;font-style:normal;font-size:.7rem;color:#77776d}
+.bubble{max-width:86%;padding:12px 16px;border-radius:20px;font-size:.94rem;line-height:1.45}
+.bubble.me{justify-self:end;background:var(--meadow);color:var(--paper-2);border-bottom-right-radius:6px}
+.bubble.bot{justify-self:start;background:#E9E7E0;color:#5B5C53;border-bottom-left-radius:6px;font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:.8rem}
+.typing{display:inline-flex;gap:5px;padding-block:4px}
+.typing i{width:7px;height:7px;border-radius:50%;background:#A2A296;animation:blink 1.1s infinite}
+.typing i:nth-child(2){animation-delay:.18s}.typing i:nth-child(3){animation-delay:.36s}
+@keyframes blink{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+.aura-small{font-family:var(--f-display);font-style:italic;font-size:clamp(1.35rem,2.4vw,2.1rem);color:var(--ink-soft);margin:16px 0 18px;max-width:26ch}
+.aura h2{font-size:clamp(3rem,7.2vw,6.8rem);font-weight:300;line-height:.98;isolation:isolate}
+.aura h2 .ln{display:block}
+.aura h2 .glow{position:relative;display:inline-block;font-style:italic;color:var(--clay)}
+.aura h2 .glow::before{content:"";position:absolute;inset:-35% -30%;z-index:-1;background:radial-gradient(closest-side,rgba(233,168,58,.6),rgba(233,168,58,0));animation:halo 3.4s ease-in-out infinite}
+@keyframes halo{0%,100%{transform:scale(.9);opacity:.7}50%{transform:scale(1.15);opacity:1}}
+.aura h2 .u em{color:var(--meadow)}
+.aura-foot{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:30px}
+.stamp{font-family:var(--f-hand);font-size:1.9rem;color:var(--clay);padding:4px 18px;border:2px dashed currentColor;border-radius:12px;transform:rotate(-6deg);display:inline-block}
+.aura-foot .hand{font-size:1.6rem;color:var(--meadow)}
+@media (max-width:860px){.aura-grid{grid-template-columns:1fr}.chat{order:2}}
+@media (prefers-reduced-motion:reduce){.typing i,.aura h2 .glow::before{animation:none}}
 
 /* ---------- About: polaroids ---------- */
 .about{padding-block:clamp(60px,10vw,140px);position:relative}
@@ -345,8 +377,8 @@ footer{background:#2F3424;color:rgba(251,245,232,.68);padding-block:56px calc(40
   <canvas id="seq" aria-label="Adrian walking through a garden"></canvas>
   <div class="leak a" id="leakA"></div><div class="leak b" id="leakB"></div>
   <div class="hero-copy" id="heroCopy">
-    <span class="eyebrow">Companionship &amp; mental fortitude</span>
     <h1 class="hero-title" id="heroTitle" aria-label="Adrian">Adrian</h1>
+    <p class="hero-tag">Companionship <span>&amp;</span> Mental Fortitude</p>
     <p class="hero-sub">Steady company for whatever life brings.</p>
     <p class="hero-lede">Thoughtful conversation, calm presence and practical strength, in person and wherever you feel most at ease.</p>
     <div class="hero-actions">
@@ -378,6 +410,25 @@ footer{background:#2F3424;color:rgba(251,245,232,.68);padding-block:56px calc(40
     <div class="marquee-item">long walks <em>✿</em> quiet talks <em>✿</em> honest company <em>✿</em> fresh air <em>✿</em> slow mornings <em>✿</em> steady footing <em>✿</em></div>
   </div>
 </div>
+
+<!-- Aura -->
+<section class="aura" id="aura">
+  <div class="leaf" data-speed="-0.2" style="width:110px;height:110px;right:6%;top:10%;color:var(--marigold);opacity:.7"><svg viewBox="0 0 100 100" fill="currentColor"><circle cx="50" cy="50" r="12"/><ellipse cx="50" cy="20" rx="9" ry="18"/><ellipse cx="50" cy="80" rx="9" ry="18"/><ellipse cx="20" cy="50" rx="18" ry="9"/><ellipse cx="80" cy="50" rx="18" ry="9"/></svg></div>
+  <div class="wrap aura-grid">
+    <div class="chat" id="chat" aria-label="Example chat with an AI assistant">
+      <div class="chat-head"><i>AI</i>Chatbot · online</div>
+      <div class="bubble me" id="b1">Rough week. Can we talk?</div>
+      <div class="bubble bot" id="b2"><span class="typing" id="typing"><i></i><i></i><i></i></span><span id="botText">As an AI, I can't truly feel what you feel. Here are 7 tips for managing stress: 1. Breathe deeply. 2. Stay hydrated...</span></div>
+      <div class="bubble me" id="b3">...thanks, I guess.</div>
+    </div>
+    <div class="aura-copy">
+      <span class="eyebrow">Real company</span>
+      <p class="aura-small">Yes, you can talk to ChatGPT about your issues.</p>
+      <h2><span class="ln">But can it replace</span> <span class="ln">Adrian's <span class="glow">aura</span></span> <span class="ln">and <span class="u"><em>wit</em><svg viewBox="0 0 200 20" preserveAspectRatio="none"><path d="M2 12C50 4 120 2 198 12"/></svg></span>?</span></h2>
+      <div class="aura-foot"><span class="stamp" id="auraStamp">Didn't think so.</span><span class="hand">some things need a real person beside you</span></div>
+    </div>
+  </div>
+</section>
 
 <!-- Statement -->
 <section class="statement">
@@ -798,7 +849,7 @@ gsap.ticker.add(() => { scrollVel *= 0.92; });
 function intro(){
   if (reduce) return;
   gsap.from('#heroTitle .ch', { yPercent: 110, rotate: 6, duration: 1.4, ease: 'expo.out', stagger: .06 });
-  gsap.from(['#heroCopy .eyebrow', '#heroCopy .hero-sub', '#heroCopy .hero-lede', '#heroCopy .hero-actions'], { y: 24, opacity: 0, filter: 'blur(8px)', duration: 1.2, ease: 'expo.out', stagger: .1, delay: .25 });
+  gsap.from(['#heroCopy .hero-tag', '#heroCopy .hero-sub', '#heroCopy .hero-lede', '#heroCopy .hero-actions'], { y: 24, opacity: 0, filter: 'blur(8px)', duration: 1.2, ease: 'expo.out', stagger: .1, delay: .25 });
   gsap.from(canvas, { scale: 1.06, opacity: 0, duration: 1.6, ease: 'expo.out' });
   gsap.from('#heroNote', { opacity: 0, x: 20, rotate: -14, duration: 1.2, ease: 'expo.out', delay: 1.1 });
   gsap.to('#leakA', { opacity: .55, duration: 2.4, ease: 'sine.out', delay: .4 });
@@ -850,6 +901,25 @@ $$('[data-marquee]').forEach(mq => {
     gsap.set(mq, { x });
   });
 });
+
+/* ---------- Aura: chat plays out, then the question lands ---------- */
+const botText = $('#botText'), typing = $('#typing');
+if (!reduce) {
+  botText.style.display = 'none';
+  const auraTl = gsap.timeline({ scrollTrigger: { trigger: '#aura', start: 'top 65%' } });
+  auraTl.from('#chat', { y: 70, opacity: 0, rotate: 5, duration: 1, ease: 'expo.out' })
+    .from('#b1', { scale: .5, opacity: 0, transformOrigin: '100% 100%', duration: .5, ease: 'back.out(2)' }, '-=.4')
+    .from('#b2', { scale: .5, opacity: 0, transformOrigin: '0% 100%', duration: .4, ease: 'back.out(2)' }, '+=.3')
+    .add(() => { typing.style.display = 'none'; botText.style.display = ''; }, '+=1.1')
+    .from('#botText', { opacity: 0, duration: .4 })
+    .from('#b3', { scale: .5, opacity: 0, transformOrigin: '100% 100%', duration: .5, ease: 'back.out(2)' }, '+=.8')
+    .to('#b2', { filter: 'grayscale(1) blur(.6px)', opacity: .5, duration: .8 }, '+=.2')
+    .from('.aura-copy .eyebrow, .aura-small', { y: 24, opacity: 0, stagger: .1, duration: .9, ease: 'expo.out' }, .3)
+    .from('.aura h2 .ln', { yPercent: 60, opacity: 0, filter: 'blur(10px)', stagger: .14, duration: 1.1, ease: 'expo.out' }, .6)
+    .from('#auraStamp', { scale: 2.6, opacity: 0, rotate: -30, duration: .7, ease: 'back.out(2.2)' }, '>-.1')
+    .from('.aura-foot .hand', { opacity: 0, x: -20, duration: .8, ease: 'expo.out' }, '<.2');
+  gsap.to('#chat', { y: -50, rotate: 1, ease: 'none', scrollTrigger: { trigger: '#aura', start: 'top bottom', end: 'bottom top', scrub: true } });
+} else { typing.style.display = 'none'; }
 
 /* ---------- Statement ---------- */
 gsap.to('.statement .w', { opacity: 1, stagger: .1, ease: 'none', scrollTrigger: { trigger: '#statement', start: 'top 80%', end: 'bottom 45%', scrub: true } });
