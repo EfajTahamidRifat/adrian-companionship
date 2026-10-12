@@ -1,4 +1,5 @@
 <title>Adrian · Companionship &amp; Mental Fortitude</title>
+<link rel="preload" as="image" href="frames/f001.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Figtree:wght@300;400;500;600&family=Caveat:wght@500;600&family=Courier+Prime&display=swap">
@@ -371,6 +372,31 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1;margin:0;tex
 #grass{position:absolute;left:0;bottom:0;width:100%;height:24vh;z-index:5;pointer-events:none}
 @media (prefers-reduced-motion:reduce){.vignette::after,.dust,.type .caret{animation:none}.pola img{transition:none}.sign{clip-path:none}}
 
+
+/* ---------- Heading word reveal ---------- */
+.wd{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.14em;margin-bottom:-.14em}
+.wi{display:inline-block;will-change:transform}
+.hero-title .ch{cursor:default}
+
+/* ---------- Vine scroll progress ---------- */
+.vine{position:fixed;left:10px;top:0;height:100vh;width:46px;z-index:95;pointer-events:none;display:none}
+@media (min-width:1100px){.vine{display:block}}
+.vine path.stem{fill:none;stroke:#5F8442;stroke-width:2;stroke-linecap:round}
+.vine .lf{fill:#7E9A5A;transform-box:fill-box;transform-origin:0% 50%;transform:scale(0)}
+.vine .bl{fill:#DE8E7C;transform-box:fill-box;transform-origin:50% 50%;transform:scale(0)}
+
+/* ---------- Sketchbook beside the letter ---------- */
+.letter-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(40px,6vw,90px);align-items:center}
+.letter-grid .letter{max-width:none;margin:0}
+.sketch{position:relative;margin:0;background:#FBF3E2;padding:18px 18px 64px;box-shadow:0 30px 60px -36px rgba(80,50,20,.55),0 2px 6px rgba(80,50,20,.1);transform:rotate(2.5deg);max-width:420px;justify-self:center;width:100%}
+.sketch .sk{position:relative;overflow:hidden;aspect-ratio:600/950;background:#FAF0DE}
+.sketch .sk img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0 0 100% 0)}
+.sketch .pencil{position:absolute;left:0;top:0;width:64px;z-index:2;pointer-events:none;will-change:transform;filter:drop-shadow(2px 4px 4px rgba(0,0,0,.2))}
+.sketch figcaption{position:absolute;left:0;right:0;bottom:18px;text-align:center;font-family:var(--f-hand);font-size:1.5rem;color:var(--ink-soft)}
+.sketch .clip{position:absolute;top:-18px;left:28px;width:22px;height:58px;border:3px solid #9AA0A6;border-radius:12px;z-index:3}
+.painted-band{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,24px);margin-top:clamp(40px,6vw,70px)}
+@media (max-width:900px){.letter-grid{grid-template-columns:1fr}.sketch{max-width:340px}}
+
 /* ---------- Footer ---------- */
 footer{background:#2F3424;color:rgba(251,245,232,.68);padding-block:56px calc(40px + env(safe-area-inset-bottom,0px));font-size:.86rem}
 .foot{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-end}
@@ -386,6 +412,7 @@ footer{background:#2F3424;color:rgba(251,245,232,.68);padding-block:56px calc(40
 
 <div class="grain" aria-hidden="true"></div>
 <canvas id="petals" aria-hidden="true"></canvas>
+<svg class="vine" id="vine" aria-hidden="true"></svg>
 
 <!-- Preloader -->
 <div class="loader" id="loader" aria-hidden="true">
@@ -497,9 +524,9 @@ footer{background:#2F3424;color:rgba(251,245,232,.68);padding-block:56px calc(40
 <section class="about" id="about">
   <div class="wrap about-grid">
     <div class="polas" id="polas">
-      <figure class="pola p2" data-cursor="Garden"><span class="tape"></span><div class="img"><img src="pola-garden.webp" alt="Sunlit garden branches"></div><figcaption>the long way round</figcaption></figure>
+      <figure class="pola p2" data-cursor="Garden"><span class="tape"></span><div class="img"><img src="pola-garden.webp" alt="Sunlit garden branches" loading="lazy" decoding="async"></div><figcaption>the long way round</figcaption></figure>
       <figure class="pola main" data-cursor="Hello"><span class="tape"></span><div class="img"><img src="about.webp" alt="Adrian, in a black polo with a jacket over his shoulder, standing in a garden"></div><figcaption>Adrian, spring</figcaption></figure>
-      <figure class="pola p3" data-cursor="Bloom"><span class="tape"></span><div class="img"><img src="pola-flowers.webp" alt="Pink azaleas in bloom"></div><figcaption>azaleas in bloom</figcaption></figure>
+      <figure class="pola p3" data-cursor="Bloom"><span class="tape"></span><div class="img"><img src="pola-flowers.webp" alt="Pink azaleas in bloom" loading="lazy" decoding="async"></div><figcaption>azaleas in bloom</figcaption></figure>
     </div>
     <div class="about-copy">
       <span class="eyebrow">About</span>
@@ -544,8 +571,8 @@ footer{background:#2F3424;color:rgba(251,245,232,.68);padding-block:56px calc(40
     <div><span class="eyebrow">Little moments</span><h2>The good stuff is <em>usually small.</em></h2></div>
     <p>A walk that runs long. A coffee gone cold mid-sentence. The kind of afternoons worth keeping.</p>
   </div>
-  <div class="strip s1"><span class="edge">ADRIAN 400 ▸ SAFETY FILM</span><div class="strip-track" id="strip1"><figure class="cell" data-n="01A"><img src="frames/f001.webp" alt="" loading="lazy"><figcaption>first steps</figcaption></figure><figure class="cell" data-n="02A"><img src="pola-garden.webp" alt="" loading="lazy"><figcaption>the long way round</figcaption></figure><figure class="cell" data-n="03A"><img src="frames/f060.webp" alt="" loading="lazy" style="object-position:50% 72%"><figcaption>listening</figcaption></figure><figure class="cell" data-n="04A"><img src="pola-flowers.webp" alt="" loading="lazy"><figcaption>spring</figcaption></figure><figure class="cell" data-n="05A"><img src="frames/f120.webp" alt="" loading="lazy" style="object-position:50% 92%"><figcaption>good company</figcaption></figure><figure class="cell" data-n="06A"><img src="plate.webp" alt="" loading="lazy"><figcaption>quiet places</figcaption></figure><figure class="cell" data-n="07A"><img src="frames/f150.webp" alt="" loading="lazy"><figcaption>steady</figcaption></figure><figure class="cell" data-n="08A"><img src="frames/f030.webp" alt="" loading="lazy" style="object-position:50% 2%"><figcaption>fresh air</figcaption></figure><figure class="cell" data-n="01A"><img src="frames/f001.webp" alt="" loading="lazy"><figcaption>first steps</figcaption></figure><figure class="cell" data-n="02A"><img src="pola-garden.webp" alt="" loading="lazy"><figcaption>the long way round</figcaption></figure><figure class="cell" data-n="03A"><img src="frames/f060.webp" alt="" loading="lazy" style="object-position:50% 72%"><figcaption>listening</figcaption></figure><figure class="cell" data-n="04A"><img src="pola-flowers.webp" alt="" loading="lazy"><figcaption>spring</figcaption></figure><figure class="cell" data-n="05A"><img src="frames/f120.webp" alt="" loading="lazy" style="object-position:50% 92%"><figcaption>good company</figcaption></figure><figure class="cell" data-n="06A"><img src="plate.webp" alt="" loading="lazy"><figcaption>quiet places</figcaption></figure><figure class="cell" data-n="07A"><img src="frames/f150.webp" alt="" loading="lazy"><figcaption>steady</figcaption></figure><figure class="cell" data-n="08A"><img src="frames/f030.webp" alt="" loading="lazy" style="object-position:50% 2%"><figcaption>fresh air</figcaption></figure></div></div>
-  <div class="strip s2"><span class="edge">▸ 24 EXP · I COME TO YOU</span><div class="strip-track" id="strip2"><figure class="cell" data-n="05A"><img src="frames/f120.webp" alt="" loading="lazy" style="object-position:50% 92%"><figcaption>good company</figcaption></figure><figure class="cell" data-n="08A"><img src="frames/f030.webp" alt="" loading="lazy" style="object-position:50% 2%"><figcaption>fresh air</figcaption></figure><figure class="cell" data-n="04A"><img src="pola-flowers.webp" alt="" loading="lazy"><figcaption>spring</figcaption></figure><figure class="cell" data-n="01A"><img src="frames/f001.webp" alt="" loading="lazy"><figcaption>first steps</figcaption></figure><figure class="cell" data-n="07A"><img src="frames/f150.webp" alt="" loading="lazy"><figcaption>steady</figcaption></figure><figure class="cell" data-n="02A"><img src="pola-garden.webp" alt="" loading="lazy"><figcaption>the long way round</figcaption></figure><figure class="cell" data-n="06A"><img src="plate.webp" alt="" loading="lazy"><figcaption>quiet places</figcaption></figure><figure class="cell" data-n="03A"><img src="frames/f060.webp" alt="" loading="lazy" style="object-position:50% 72%"><figcaption>listening</figcaption></figure><figure class="cell" data-n="05A"><img src="frames/f120.webp" alt="" loading="lazy" style="object-position:50% 92%"><figcaption>good company</figcaption></figure><figure class="cell" data-n="08A"><img src="frames/f030.webp" alt="" loading="lazy" style="object-position:50% 2%"><figcaption>fresh air</figcaption></figure><figure class="cell" data-n="04A"><img src="pola-flowers.webp" alt="" loading="lazy"><figcaption>spring</figcaption></figure><figure class="cell" data-n="01A"><img src="frames/f001.webp" alt="" loading="lazy"><figcaption>first steps</figcaption></figure><figure class="cell" data-n="07A"><img src="frames/f150.webp" alt="" loading="lazy"><figcaption>steady</figcaption></figure><figure class="cell" data-n="02A"><img src="pola-garden.webp" alt="" loading="lazy"><figcaption>the long way round</figcaption></figure><figure class="cell" data-n="06A"><img src="plate.webp" alt="" loading="lazy"><figcaption>quiet places</figcaption></figure><figure class="cell" data-n="03A"><img src="frames/f060.webp" alt="" loading="lazy" style="object-position:50% 72%"><figcaption>listening</figcaption></figure></div></div>
+  <div class="strip s1"><span class="edge">ADRIAN 400 ▸ SAFETY FILM</span><div class="strip-track" id="strip1"><figure class="cell" data-n="01A"><img src="frames/f001.webp" alt="" loading="lazy"><figcaption>first steps</figcaption></figure><figure class="cell" data-n="02A"><img src="pola-garden.webp" alt="" loading="lazy"><figcaption>the long way round</figcaption></figure><figure class="cell" data-n="03A"><img src="frames/f060.webp" alt="" loading="lazy" style="object-position:50% 72%"><figcaption>listening</figcaption></figure><figure class="cell" data-n="04A"><img src="pola-flowers.webp" alt="" loading="lazy"><figcaption>spring</figcaption></figure><figure class="cell" data-n="05A"><img src="duotone.webp" alt="" loading="lazy" style="object-position:50% 25%"><figcaption>old photographs</figcaption></figure><figure class="cell" data-n="06A"><img src="plate.webp" alt="" loading="lazy"><figcaption>quiet places</figcaption></figure><figure class="cell" data-n="07A"><img src="sketch.webp" alt="" loading="lazy" style="object-position:50% 20%"><figcaption>sketchbook</figcaption></figure><figure class="cell" data-n="08A"><img src="painted.webp" alt="" loading="lazy" style="object-position:50% 30%"><figcaption>painted afternoons</figcaption></figure><figure class="cell" data-n="01A"><img src="frames/f001.webp" alt="" loading="lazy"><figcaption>first steps</figcaption></figure><figure class="cell" data-n="02A"><img src="pola-garden.webp" alt="" loading="lazy"><figcaption>the long way round</figcaption></figure><figure class="cell" data-n="03A"><img src="frames/f060.webp" alt="" loading="lazy" style="object-position:50% 72%"><figcaption>listening</figcaption></figure><figure class="cell" data-n="04A"><img src="pola-flowers.webp" alt="" loading="lazy"><figcaption>spring</figcaption></figure><figure class="cell" data-n="05A"><img src="duotone.webp" alt="" loading="lazy" style="object-position:50% 25%"><figcaption>old photographs</figcaption></figure><figure class="cell" data-n="06A"><img src="plate.webp" alt="" loading="lazy"><figcaption>quiet places</figcaption></figure><figure class="cell" data-n="07A"><img src="sketch.webp" alt="" loading="lazy" style="object-position:50% 20%"><figcaption>sketchbook</figcaption></figure><figure class="cell" data-n="08A"><img src="painted.webp" alt="" loading="lazy" style="object-position:50% 30%"><figcaption>painted afternoons</figcaption></figure></div></div>
+  <div class="strip s2"><span class="edge">▸ 24 EXP · I COME TO YOU</span><div class="strip-track" id="strip2"><figure class="cell" data-n="05A"><img src="duotone.webp" alt="" loading="lazy" style="object-position:50% 25%"><figcaption>old photographs</figcaption></figure><figure class="cell" data-n="08A"><img src="painted.webp" alt="" loading="lazy" style="object-position:50% 30%"><figcaption>painted afternoons</figcaption></figure><figure class="cell" data-n="04A"><img src="pola-flowers.webp" alt="" loading="lazy"><figcaption>spring</figcaption></figure><figure class="cell" data-n="01A"><img src="frames/f001.webp" alt="" loading="lazy"><figcaption>first steps</figcaption></figure><figure class="cell" data-n="07A"><img src="sketch.webp" alt="" loading="lazy" style="object-position:50% 20%"><figcaption>sketchbook</figcaption></figure><figure class="cell" data-n="02A"><img src="pola-garden.webp" alt="" loading="lazy"><figcaption>the long way round</figcaption></figure><figure class="cell" data-n="06A"><img src="plate.webp" alt="" loading="lazy"><figcaption>quiet places</figcaption></figure><figure class="cell" data-n="03A"><img src="frames/f060.webp" alt="" loading="lazy" style="object-position:50% 72%"><figcaption>listening</figcaption></figure><figure class="cell" data-n="05A"><img src="duotone.webp" alt="" loading="lazy" style="object-position:50% 25%"><figcaption>old photographs</figcaption></figure><figure class="cell" data-n="08A"><img src="painted.webp" alt="" loading="lazy" style="object-position:50% 30%"><figcaption>painted afternoons</figcaption></figure><figure class="cell" data-n="04A"><img src="pola-flowers.webp" alt="" loading="lazy"><figcaption>spring</figcaption></figure><figure class="cell" data-n="01A"><img src="frames/f001.webp" alt="" loading="lazy"><figcaption>first steps</figcaption></figure><figure class="cell" data-n="07A"><img src="sketch.webp" alt="" loading="lazy" style="object-position:50% 20%"><figcaption>sketchbook</figcaption></figure><figure class="cell" data-n="02A"><img src="pola-garden.webp" alt="" loading="lazy"><figcaption>the long way round</figcaption></figure><figure class="cell" data-n="06A"><img src="plate.webp" alt="" loading="lazy"><figcaption>quiet places</figcaption></figure><figure class="cell" data-n="03A"><img src="frames/f060.webp" alt="" loading="lazy" style="object-position:50% 72%"><figcaption>listening</figcaption></figure></div></div>
 </section>
 
 <!-- Services -->
@@ -660,7 +687,7 @@ footer{background:#2F3424;color:rgba(251,245,232,.68);padding-block:56px calc(40
 <!-- Letter -->
 <section class="letter-sec" id="letter-sec">
   <div class="leaf" data-speed="-0.25" style="width:200px;height:200px;left:3%;top:12%;color:var(--meadow);opacity:.5"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width=".9"><path d="M50 96C50 60 50 30 50 4"/><path d="M50 30c-14-2-22-12-22-24 12 2 20 10 22 24Z"/><path d="M50 30c14-2 22-12 22-24-12 2-20 10-22 24Z"/><path d="M50 56c-16-2-26-14-26-28 14 2 24 12 26 28Z"/><path d="M50 56c16-2 26-14 26-28-14 2-24 12-26 28Z"/></svg></div>
-  <div class="wrap">
+  <div class="wrap letter-grid">
     <article class="letter" id="letter" aria-label="A note from Adrian">
       <span class="tape"></span><span class="stain"></span>
       <svg class="flower" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 140C52 110 48 80 50 50" fill="none" stroke="#7E9A5A" stroke-width="2"/><path d="M50 95c-14-4-22-16-20-26 12 2 20 12 20 26Z" fill="#93AE6E"/><g fill="currentColor" opacity=".9"><ellipse cx="50" cy="30" rx="9" ry="16"/><ellipse cx="50" cy="30" rx="9" ry="16" transform="rotate(72 50 46)"/><ellipse cx="50" cy="30" rx="9" ry="16" transform="rotate(144 50 46)"/><ellipse cx="50" cy="30" rx="9" ry="16" transform="rotate(216 50 46)"/><ellipse cx="50" cy="30" rx="9" ry="16" transform="rotate(288 50 46)"/></g><circle cx="50" cy="46" r="7" fill="#E9A83A"/></svg>
@@ -674,6 +701,12 @@ That&#x27;s what I do. No clinic, no clipboard. Just good conversation, fresh ai
 If that sounds like what you&#x27;re looking for, I&#x27;d be glad to meet you wherever you feel at ease.</p>
       <p class="sign" id="sign">Adrian</p>
     </article>
+    <figure class="sketch" id="sketch">
+      <span class="clip"></span>
+      <div class="sk"><img src="sketch.webp" alt="Pencil-style sketch of Adrian" loading="lazy" decoding="async" id="sketchImg"></div>
+      <svg class="pencil" id="pencil" viewBox="0 0 64 64" aria-hidden="true"><g transform="rotate(-40 32 32)"><rect x="26" y="2" width="12" height="46" rx="2" fill="#E9A83A"/><rect x="26" y="2" width="12" height="7" fill="#DE8E7C"/><rect x="26" y="9" width="12" height="3" fill="#C9C2B4"/><path d="M26 48h12l-6 12Z" fill="#F2D9B8"/><path d="M30.5 57h3l-1.5 3Z" fill="#2F3424"/></g></svg>
+      <figcaption>pencil &amp; paper</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -768,22 +801,33 @@ const pad = n => String(n).padStart(3, '0');
 const bar = $('#ringBar'), pct = $('#loaderPct'), loader = $('#loader');
 let released = false;
 function release(){ if (released) return; released = true; loader.classList.add('done'); intro(); }
+/* Load a coarse set of keyframes first (every 10th), open the page, then fill in the rest.
+   The sequence plays straight away using the nearest loaded frame while the gaps load. */
+const ORDER = [];
+for (let i = 0; i < N; i += 10) ORDER.push(i);
+ORDER.push(N - 1);
+[5, 1].forEach(step => { for (let i = 0; i < N; i += step) if (!ORDER.includes(i)) ORDER.push(i); });
+const GATE = 16; // frames needed before the loader lifts
 function onLoad(){
   loaded++;
-  const p = loaded / N;
+  const p = Math.min(1, loaded / GATE);
   bar.style.strokeDashoffset = 239 * (1 - p);
   pct.textContent = pad(Math.round(p * 100));
   if (loaded === 1) draw();
-  if (loaded === N) setTimeout(release, 250);
+  if (loaded === GATE) setTimeout(release, 150);
 }
-for (let i = 0; i < N; i++) {
-  const img = new Image();
-  img.decoding = 'async';
-  img.onload = onLoad; img.onerror = onLoad;
-  img.src = `frames/f${pad(i + 1)}.webp`;
-  frames[i] = img;
+let qi = 0, inflight = 0;
+function pump(){
+  while (inflight < 6 && qi < ORDER.length) {
+    const i = ORDER[qi++], img = new Image();
+    img.decoding = 'async'; inflight++;
+    img.onload = img.onerror = () => { inflight--; onLoad(); pump(); };
+    img.src = `frames/f${pad(i + 1)}.webp`;
+    frames[i] = img;
+  }
 }
-setTimeout(release, 4500);
+pump();
+setTimeout(release, 3000);
 
 function resize(){
   dpr = Math.min(window.devicePixelRatio || 1, 1.5);
@@ -882,9 +926,20 @@ function newPetal(any){ return { x: Math.random() * PW, y: any ? Math.random() *
 sizePetals(); addEventListener('resize', sizePetals);
 let mouseX = -999, mouseY = -999;
 addEventListener('pointermove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+const bursts = [];
+addEventListener('pointerdown', e => {
+  if (reduce || e.target.closest('a, button, input, select, textarea')) return;
+  for (let k = 0; k < 14; k++) { const ang = Math.random() * 6.28, sp = 2 + Math.random() * 4;
+    bursts.push({ x: e.clientX, y: e.clientY, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp - 2, s: 4 + Math.random() * 5, r: Math.random() * 6, c: petalColors[(Math.random() * petalColors.length) | 0], life: 1 }); }
+});
 function tickPetals(){
   if (document.hidden) return;
   pctx.setTransform(1, 0, 0, 1, 0, 0); pctx.clearRect(0, 0, PW, PH);
+  for (let k = bursts.length - 1; k >= 0; k--) { const b = bursts[k];
+    b.vy += .12; b.vx *= .98; b.x += b.vx; b.y += b.vy; b.r += .1; b.life -= .014;
+    if (b.life <= 0) { bursts.splice(k, 1); continue; }
+    pctx.save(); pctx.translate(b.x, b.y); pctx.rotate(b.r); pctx.globalAlpha = b.life; pctx.fillStyle = b.c;
+    pctx.beginPath(); pctx.ellipse(0, 0, b.s * .55, b.s * .95, 0, 0, 7); pctx.fill(); pctx.restore(); }
   const wind = Math.max(-6, Math.min(6, scrollVel / 400));
   petals.forEach((p, i) => {
     p.sway += .015; p.flip += .05; p.r += p.vr + wind * .004;
@@ -1129,6 +1184,69 @@ gsap.ticker.add(() => {
   });
 });
 
+
+/* ---------- Headings: words rise out of a mask ---------- */
+function splitWords(h){
+  [...h.childNodes].forEach(n => {
+    if (n.nodeType === 3) {
+      const frag = document.createDocumentFragment();
+      n.textContent.split(/(\s+)/).forEach(part => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+        const o = document.createElement('span'); o.className = 'wd'; const i = document.createElement('span'); i.className = 'wi'; i.textContent = part; o.appendChild(i); frag.appendChild(o);
+      });
+      h.replaceChild(frag, n);
+    } else if (n.nodeType === 1) {
+      const o = document.createElement('span'); o.className = 'wd'; const i = document.createElement('span'); i.className = 'wi';
+      h.replaceChild(o, n); i.appendChild(n); o.appendChild(i);
+    }
+  });
+}
+if (!reduce) $$('.services-head h2, .reel-head h2, .approach h2, .come-intro h2, .contact h2').forEach(h => {
+  splitWords(h);
+  gsap.from(h.querySelectorAll('.wi'), { yPercent: 115, rotate: 4, duration: 1.1, ease: 'expo.out', stagger: .06,
+    scrollTrigger: { trigger: h, start: 'top 85%' } });
+});
+
+/* ---------- Hero letters bounce when touched ---------- */
+if (fine && !reduce) $$('#heroTitle .ch').forEach(ch => ch.addEventListener('mouseenter', () => {
+  gsap.fromTo(ch, { y: 0 }, { y: -26, rotate: gsap.utils.random(-8, 8), duration: .25, ease: 'power2.out', yoyo: true, repeat: 1, onComplete: () => gsap.to(ch, { rotate: 0, duration: .4 }) });
+}));
+
+/* ---------- Vine grows with your scroll ---------- */
+(() => {
+  const svg = $('#vine'); if (!svg || innerWidth < 1100) return;
+  const H = innerHeight, W = 46; svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  let d = `M ${W / 2} 0`; const pts = [];
+  for (let y = 0; y <= H; y += 60) { const x = W / 2 + Math.sin(y / 60) * 12; d += ` Q ${W / 2 + Math.sin(y / 60 + .8) * 18} ${y + 30} ${x} ${y + 60}`; pts.push([x, y + 60]); }
+  const ns = 'http://www.w3.org/2000/svg';
+  const stem = document.createElementNS(ns, 'path'); stem.setAttribute('d', d); stem.setAttribute('class', 'stem'); svg.appendChild(stem);
+  const L = stem.getTotalLength(); stem.style.strokeDasharray = L; stem.style.strokeDashoffset = L;
+  const leaves = pts.map(([x, y], i) => {
+    const el = document.createElementNS(ns, i % 4 === 3 ? 'circle' : 'path');
+    if (i % 4 === 3) { el.setAttribute('cx', x); el.setAttribute('cy', y); el.setAttribute('r', 4); el.setAttribute('class', 'bl'); }
+    else { const dir = i % 2 ? 1 : -1; el.setAttribute('d', `M ${x} ${y} q ${8 * dir} -10 ${16 * dir} -4 q ${-6 * dir} 8 ${-16 * dir} 4 Z`); el.setAttribute('class', 'lf'); }
+    svg.appendChild(el); return { el, at: y / H, on: false };
+  });
+  ScrollTrigger.create({ start: 0, end: 'max', onUpdate: self => {
+    const p = self.progress; stem.style.strokeDashoffset = L * (1 - p);
+    leaves.forEach(l => { const on = p >= l.at; if (on !== l.on) { l.on = on; gsap.to(l.el, { scale: on ? 1 : 0, duration: on ? .6 : .3, ease: on ? 'back.out(2.5)' : 'power2.in' }); } });
+  }});
+})();
+
+/* ---------- Sketch draws itself, pencil follows the line ---------- */
+if (!reduce) {
+  const skTl = gsap.timeline({ scrollTrigger: { trigger: '#sketch', start: 'top 80%', end: 'bottom 45%', scrub: .6 } });
+  const pencil = $('#pencil'), sk = $('#sketch .sk');
+  const st = { p: 0 };
+  skTl.to(st, { p: 1, ease: 'none', onUpdate: () => {
+    const p = st.p; $('#sketchImg').style.clipPath = `inset(0 0 ${100 - p * 100}% 0)`;
+    const w = sk.clientWidth, h = sk.clientHeight;
+    gsap.set(pencil, { x: 18 + (Math.sin(p * 60) * .5 + .5) * (w - 30), y: 18 + p * h - 52, opacity: p > 0 && p < 1 ? 1 : 0 });
+  }});
+  gsap.from('#sketch', { y: 80, rotate: -4, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: '#sketch', start: 'top 90%' } });
+} else { $('#sketchImg').style.clipPath = 'none'; $('#pencil').style.display = 'none'; }
+
 /* ---------- Services stacking ---------- */
 const cards = $$('.card');
 cards.forEach((card, i) => {
@@ -1200,7 +1318,7 @@ $$('.step').forEach((s, i) => {
   gsap.to(s.querySelector('.line'), { scaleX: 1, duration: 1.4, ease: 'expo.out', delay: i * .15, scrollTrigger: { trigger: '.steps', start: 'top 80%' } });
   gsap.from(s.children, { y: 30, opacity: 0, duration: 1, ease: 'expo.out', delay: i * .15 + .1, stagger: .06, scrollTrigger: { trigger: '.steps', start: 'top 80%' } });
 });
-gsap.from('.approach h2', { y: 50, opacity: 0, filter: 'blur(10px)', duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: '.approach h2', start: 'top 85%' } });
+
 
 /* ---------- Pricing ---------- */
 const priceEl = $('#priceNum');
